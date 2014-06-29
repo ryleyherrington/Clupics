@@ -71,9 +71,36 @@
 {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    cell.textLabel.text = [NSString stringWithFormat:@"TableRow:%d, Section:%d", indexPath.row, indexPath.section];
     
     return cell;
 }
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 80; //height
+}
+
+-(UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    UIView* footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 80)]; //xpos, ypos, width, height
+    footer.backgroundColor = [UIColor greenColor];
+    
+    UIButton *twitterSearch = [[UIButton alloc] initWithFrame:CGRectMake(0, 15, 200, 50)];
+    twitterSearch.titleLabel.text = @"Search Twitter";
+    [twitterSearch setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [twitterSearch setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+    twitterSearch.backgroundColor = [UIColor blueColor];
+    [twitterSearch  addTarget:self action:@selector(twitterTouched) forControlEvents:UIControlEventTouchUpInside];
+    
+    [footer addSubview:twitterSearch];
+    
+    return footer;
+}
+#pragma mark - Selectors
+
+-(void)twitterTouched{
+    NSLog(@"TOUCHED");
+}
+
 
 /*----------------------*/
 #pragma mark - Tranistion Stuff
