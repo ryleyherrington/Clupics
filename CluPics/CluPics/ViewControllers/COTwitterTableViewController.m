@@ -101,8 +101,6 @@
     NSLog(@"TOUCHED");
 }
 
-
-/*----------------------*/
 #pragma mark - Tranistion Stuff
 - (UIPanGestureRecognizer *)dynamicTransitionPanGesture {
     if (_dynamicTransitionPanGesture) return _dynamicTransitionPanGesture;
