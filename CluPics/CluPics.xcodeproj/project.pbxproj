@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		73238F051960759900CD654E /* RHBasicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73238F041960759900CD654E /* RHBasicViewController.m */; };
 		73662F0118C1B45A00733262 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73662F0018C1B45A00733262 /* Foundation.framework */; };
 		73662F0318C1B45A00733262 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73662F0218C1B45A00733262 /* CoreGraphics.framework */; };
 		73662F0518C1B45A00733262 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73662F0418C1B45A00733262 /* UIKit.framework */; };
@@ -22,7 +23,6 @@
 		73662F3318C1B62200733262 /* RHDynamicTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 73662F3218C1B62200733262 /* RHDynamicTransition.m */; };
 		73662F3618C1B9F000733262 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73662F3518C1B9F000733262 /* MainStoryboard.storyboard */; };
 		73662F3918C1BAE000733262 /* PlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73662F3818C1BAE000733262 /* PlayViewController.m */; };
-		73662F3F18C2650A00733262 /* RHSubmission.m in Sources */ = {isa = PBXBuildFile; fileRef = 73662F3E18C2650A00733262 /* RHSubmission.m */; };
 		73FF5CFB18C2C9C900F99D68 /* RHMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73FF5CFA18C2C9C900F99D68 /* RHMenuViewController.m */; };
 		73FF5CFE18C3A95800F99D68 /* RHFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73FF5CFD18C3A95800F99D68 /* RHFeedViewController.m */; };
 		73FF5D0118C3AA5400F99D68 /* RHFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 73FF5D0018C3AA5400F99D68 /* RHFeed.m */; };
@@ -41,6 +41,8 @@
 
 /* Begin PBXFileReference section */
 		0AEF038B610D46C48895DC24 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		73238F031960759900CD654E /* RHBasicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHBasicViewController.h; sourceTree = "<group>"; };
+		73238F041960759900CD654E /* RHBasicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHBasicViewController.m; sourceTree = "<group>"; };
 		73662EFD18C1B45A00733262 /* CluPics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CluPics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73662F0018C1B45A00733262 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		73662F0218C1B45A00733262 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -62,8 +64,6 @@
 		73662F3518C1B9F000733262 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		73662F3718C1BAE000733262 /* PlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayViewController.h; sourceTree = "<group>"; };
 		73662F3818C1BAE000733262 /* PlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayViewController.m; sourceTree = "<group>"; };
-		73662F3D18C2650A00733262 /* RHSubmission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHSubmission.h; path = ../RHSubmission.h; sourceTree = "<group>"; };
-		73662F3E18C2650A00733262 /* RHSubmission.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHSubmission.m; path = ../RHSubmission.m; sourceTree = "<group>"; };
 		73FF5CF918C2C9C900F99D68 /* RHMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHMenuViewController.h; sourceTree = "<group>"; };
 		73FF5CFA18C2C9C900F99D68 /* RHMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHMenuViewController.m; sourceTree = "<group>"; };
 		73FF5CFC18C3A95800F99D68 /* RHFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHFeedViewController.h; sourceTree = "<group>"; };
@@ -192,6 +192,8 @@
 				73FF5CFA18C2C9C900F99D68 /* RHMenuViewController.m */,
 				73FF5CFC18C3A95800F99D68 /* RHFeedViewController.h */,
 				73FF5CFD18C3A95800F99D68 /* RHFeedViewController.m */,
+				73238F031960759900CD654E /* RHBasicViewController.h */,
+				73238F041960759900CD654E /* RHBasicViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -207,8 +209,6 @@
 		73FF5D0218C3AAA000F99D68 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
-				73662F3D18C2650A00733262 /* RHSubmission.h */,
-				73662F3E18C2650A00733262 /* RHSubmission.m */,
 				73FF5CFF18C3AA5400F99D68 /* RHFeed.h */,
 				73FF5D0018C3AA5400F99D68 /* RHFeed.m */,
 			);
@@ -350,9 +350,9 @@
 				73FF5CFE18C3A95800F99D68 /* RHFeedViewController.m in Sources */,
 				73FF5D0118C3AA5400F99D68 /* RHFeed.m in Sources */,
 				73662F3918C1BAE000733262 /* PlayViewController.m in Sources */,
-				73662F3F18C2650A00733262 /* RHSubmission.m in Sources */,
 				73FF5CFB18C2C9C900F99D68 /* RHMenuViewController.m in Sources */,
 				73662F3318C1B62200733262 /* RHDynamicTransition.m in Sources */,
+				73238F051960759900CD654E /* RHBasicViewController.m in Sources */,
 				73662F1118C1B45A00733262 /* pickerAppDelegate.m in Sources */,
 				73662F0D18C1B45A00733262 /* main.m in Sources */,
 			);

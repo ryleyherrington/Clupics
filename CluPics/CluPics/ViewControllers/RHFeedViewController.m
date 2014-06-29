@@ -27,15 +27,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    [self parseJson];
-}
-
--(NSArray *)parseFeed{
-   
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://api.twitter.com/1/statuses/user_timeline.json?screen_name=jadoon88"]];
-    
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -62,7 +53,6 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    [cell setTitle:@"HEY"];
     return cell;
 }
 

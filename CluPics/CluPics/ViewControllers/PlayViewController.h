@@ -8,11 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PlayViewController : UIViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate>
+@interface PlayViewController : UIViewController
 
-@property (nonatomic, weak) IBOutlet UITextField* usernameField;
-@property (nonatomic, weak) IBOutlet UIImageView* img;
-@property (nonatomic, weak)IBOutlet  UILabel* prompt;
-
--(IBAction)submit:(id)sender;
 @end

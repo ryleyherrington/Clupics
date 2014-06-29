@@ -1,25 +1,25 @@
 //
-//  PlayViewController.m
+//  RHBasicViewController.m
 //  CluPics
 //
-//  Created by Ryley Herrington on 2/28/14.
+//  Created by Ryley Herrington on 6/28/14.
 //  Copyright (c) 2014 Ryley Herrington. All rights reserved.
 //
 
-#import "PlayViewController.h"
+#import "RHBasicViewController.h"
 
 //Menu and Transitions
 #import "UIViewController+ECSlidingViewController.h"
 #import "RHDynamicTransition.h"
 
-@interface PlayViewController ()
+@interface RHBasicViewController ()
 
 @property (nonatomic, strong) RHDynamicTransition *transition;
 @property (nonatomic, strong) UIPanGestureRecognizer *dynamicTransitionPanGesture;
 
 @end
 
-@implementation PlayViewController
+@implementation RHBasicViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -42,7 +42,6 @@
     [self.view addGestureRecognizer:self.dynamicTransitionPanGesture];
     
     self.navigationController.navigationBar.hidden = YES;
-    
 }
 
 - (void)didReceiveMemoryWarning {
