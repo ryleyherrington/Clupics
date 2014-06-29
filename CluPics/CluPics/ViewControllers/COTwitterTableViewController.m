@@ -76,7 +76,6 @@
     return cell;
 }
 
-<<<<<<< HEAD
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 80; //height
 }
@@ -102,8 +101,6 @@
     NSLog(@"TOUCHED");
 }
 
-=======
->>>>>>> FETCH_HEAD
 #pragma mark - Tranistion Stuff
 - (UIPanGestureRecognizer *)dynamicTransitionPanGesture {
     if (_dynamicTransitionPanGesture) return _dynamicTransitionPanGesture;
