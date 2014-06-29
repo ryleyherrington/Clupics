@@ -8,6 +8,9 @@
 
 #import "COTwitterTableViewController.h"
 
+//UIButton graphics
+#import <QuartzCore/QuartzCore.h>
+
 //Menu and Transitions
 #import "UIViewController+ECSlidingViewController.h"
 #import "RHDynamicTransition.h"
@@ -81,14 +84,27 @@
 }
 
 -(UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    /* Creating the footer */
     UIView* footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 80)]; //xpos, ypos, width, height
-    footer.backgroundColor = [UIColor greenColor];
+    footer.backgroundColor = [UIColor colorWithWhite:0.5 alpha:0.1];
     
-    UIButton *twitterSearch = [[UIButton alloc] initWithFrame:CGRectMake(0, 15, 200, 50)];
-    twitterSearch.titleLabel.text = @"Search Twitter";
+    /* Creating button to search Twitter and centering it */
+    UIButton *twitterSearch = [[UIButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width/2 - 100 ), 15, 200, 50)];
+   
+    /* Setting button appearance */
     [twitterSearch setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [twitterSearch setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+    [twitterSearch setTitle:@"Search Twitter" forState:UIControlStateNormal];
+    [twitterSearch setTitle:@"Search Twitter" forState:UIControlStateHighlighted];
+    
+    /* Rounding the corners */
+    twitterSearch.layer.cornerRadius = 10.0;
+    twitterSearch.clipsToBounds = YES;
+    
+    //twitterSearch.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
     twitterSearch.backgroundColor = [UIColor blueColor];
+    
+    /* Adding event handler */
     [twitterSearch  addTarget:self action:@selector(twitterTouched) forControlEvents:UIControlEventTouchUpInside];
     
     [footer addSubview:twitterSearch];
