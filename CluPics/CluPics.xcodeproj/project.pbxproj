@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		48CA36D01960803B006EE0CC /* COTwitterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48CA36CF1960803B006EE0CC /* COTwitterTableViewController.m */; };
 		73238F051960759900CD654E /* RHBasicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73238F041960759900CD654E /* RHBasicViewController.m */; };
 		73662F0118C1B45A00733262 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73662F0018C1B45A00733262 /* Foundation.framework */; };
 		73662F0318C1B45A00733262 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73662F0218C1B45A00733262 /* CoreGraphics.framework */; };
@@ -41,6 +42,8 @@
 
 /* Begin PBXFileReference section */
 		0AEF038B610D46C48895DC24 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		48CA36CE1960803B006EE0CC /* COTwitterTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COTwitterTableViewController.h; sourceTree = "<group>"; };
+		48CA36CF1960803B006EE0CC /* COTwitterTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COTwitterTableViewController.m; sourceTree = "<group>"; };
 		73238F031960759900CD654E /* RHBasicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHBasicViewController.h; sourceTree = "<group>"; };
 		73238F041960759900CD654E /* RHBasicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHBasicViewController.m; sourceTree = "<group>"; };
 		73662EFD18C1B45A00733262 /* CluPics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CluPics.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -194,6 +197,8 @@
 				73FF5CFD18C3A95800F99D68 /* RHFeedViewController.m */,
 				73238F031960759900CD654E /* RHBasicViewController.h */,
 				73238F041960759900CD654E /* RHBasicViewController.m */,
+				48CA36CE1960803B006EE0CC /* COTwitterTableViewController.h */,
+				48CA36CF1960803B006EE0CC /* COTwitterTableViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -351,6 +356,7 @@
 				73FF5D0118C3AA5400F99D68 /* RHFeed.m in Sources */,
 				73662F3918C1BAE000733262 /* PlayViewController.m in Sources */,
 				73FF5CFB18C2C9C900F99D68 /* RHMenuViewController.m in Sources */,
+				48CA36D01960803B006EE0CC /* COTwitterTableViewController.m in Sources */,
 				73662F3318C1B62200733262 /* RHDynamicTransition.m in Sources */,
 				73238F051960759900CD654E /* RHBasicViewController.m in Sources */,
 				73662F1118C1B45A00733262 /* pickerAppDelegate.m in Sources */,
