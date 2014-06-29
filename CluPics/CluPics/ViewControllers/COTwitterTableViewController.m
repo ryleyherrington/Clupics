@@ -20,6 +20,8 @@
 @property (nonatomic, strong) RHDynamicTransition *transition;
 @property (nonatomic, strong) UIPanGestureRecognizer *dynamicTransitionPanGesture;
 
+
+
 @end
 
 @implementation COTwitterTableViewController
@@ -48,12 +50,28 @@
     
     self.navigationController.navigationBar.hidden = YES;
     
+    //Fetching tweets
+    [self fetchTweets];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Data source retrieval and processing
+-(void)fetchTweets
+{
+    //https://api.twitter.com/1.1/search/tweets.json?q=%23rymee2014&src=typd
+    
+    //Require auth to use the request
+    
+    //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),
+    //               ^{
+    //                   NSData* data = [NSData dataWithContentsOfURL:[NSURL URLWithString:<#(NSString *)#>]]
+    //
+    //               });
 }
 
 #pragma mark - Table view data source
@@ -72,7 +90,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"TweetCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     cell.textLabel.text = [NSString stringWithFormat:@"TableRow:%d, Section:%d", indexPath.row, indexPath.section];
     

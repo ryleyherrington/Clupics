@@ -10,4 +10,8 @@
 
 @interface COTwitterTableViewController : UITableViewController
 
+@property NSArray *tweets;
+
+-(void)fetchTweets;
+
 @end
