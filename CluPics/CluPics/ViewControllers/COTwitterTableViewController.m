@@ -15,12 +15,15 @@
 #import "UIViewController+ECSlidingViewController.h"
 #import "RHDynamicTransition.h"
 
-@interface COTwitterTableViewController ()
+//SSTwitter framework
+#import "STTwitter.h"
+
+@interface COTwitterTableViewController () <UITableViewDataSource, UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UITableView *tableTweetView;
+@property (strong, nonatomic) NSMutableArray *twitterFeed;
 
 @property (nonatomic, strong) RHDynamicTransition *transition;
 @property (nonatomic, strong) UIPanGestureRecognizer *dynamicTransitionPanGesture;
-
-
 
 @end
 
@@ -63,15 +66,29 @@
 #pragma mark - Data source retrieval and processing
 -(void)fetchTweets
 {
-    //https://api.twitter.com/1.1/search/tweets.json?q=%23rymee2014&src=typd
+    STTwitterAPI *twitter = [STTwitterAPI twitterAPIAppOnlyWithConsumerKey: @"k8WN0dn0q8bxXaBp7DMd4JPkQ" consumerSecret: @"XnUo0RaOM6h0Ut1RWc7eWYE147RdvDHEkSpII1ScB3G3Xk7cwS"];
     
-    //Require auth to use the request
+    [twitter verifyCredentialsWithSuccessBlock:^(NSString *username)
+    {
+        
+        [twitter getSearchTweetsWithQuery: @"#Rymee2014" successBlock:^(NSDictionary *searchMetadata, NSArray *statuses) {
+        
+            self.twitterFeed = [NSMutableArray arrayWithArray:statuses];
+            
+            //reloading data
+            [self.tableView reloadData];
+            
+        } errorBlock:^(NSError *error) {
+            
+            NSLog(@"%@", error.debugDescription);
+        
+        }];
+        
+    } errorBlock:^(NSError *error)
+    {
+        NSLog(@"%@", error.debugDescription);
+    }];
     
-    //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),
-    //               ^{
-    //                   NSData* data = [NSData dataWithContentsOfURL:[NSURL URLWithString:<#(NSString *)#>]]
-    //
-    //               });
 }
 
 #pragma mark - Table view data source
@@ -85,14 +102,21 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 4;
+    return self.twitterFeed.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"TweetCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    cell.textLabel.text = [NSString stringWithFormat:@"TableRow:%d, Section:%d", indexPath.row, indexPath.section];
+    //cell.textLabel.text = [NSString stringWithFormat:@"TableRow:%d, Section:%d", indexPath.row, indexPath.section];
+    
+    NSInteger idx = indexPath.row;
+    NSDictionary *t = self.twitterFeed[idx];
+   
+    //TODO: Extract user name
+    //cell.textLabel.text = [NSString stringWithFormat:@"User:%@", t[@"user"]];
+    cell.detailTextLabel.text = t[@"text"];
     
     return cell;
 }
