@@ -67,16 +67,33 @@
 -(void)fetchTweets
 {
     STTwitterAPI *twitter = [STTwitterAPI twitterAPIAppOnlyWithConsumerKey: @"k8WN0dn0q8bxXaBp7DMd4JPkQ" consumerSecret: @"XnUo0RaOM6h0Ut1RWc7eWYE147RdvDHEkSpII1ScB3G3Xk7cwS"];
+   
+    NSString *searchString = @"Rymee2014";
     
     [twitter verifyCredentialsWithSuccessBlock:^(NSString *username)
     {
         
-        [twitter getSearchTweetsWithQuery: @"#Rymee2014" successBlock:^(NSDictionary *searchMetadata, NSArray *statuses) {
+        [twitter getSearchTweetsWithQuery:searchString
+                                  geocode:nil
+                                     lang:nil
+                                   locale:nil
+                               resultType:nil
+                                    count:@"30"
+                                    until:nil
+                                  sinceID:@"421875429965053952"
+                                    maxID:nil
+                          includeEntities:@(YES)
+                                 callback:nil
+                             successBlock:^(NSDictionary *searchMetadata, NSArray *statuses) {
         
             self.twitterFeed = [NSMutableArray arrayWithArray:statuses];
             
             //reloading data
             [self.tableView reloadData];
+            
+            
+            NSLog(@"Search data : %@",searchMetadata);
+            NSLog(@"\n\n Status : %@",statuses);
             
         } errorBlock:^(NSError *error) {
             
@@ -113,9 +130,10 @@
     
     NSInteger idx = indexPath.row;
     NSDictionary *t = self.twitterFeed[idx];
-   
+    
     //TODO: Extract user name
-    //cell.textLabel.text = [NSString stringWithFormat:@"User:%@", t[@"user"]];
+    NSLog(@"USER FIELD: %@", t[@"user"]);
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", [t[@"user"] objectForKey:@"name"]];
     cell.detailTextLabel.text = t[@"text"];
     
     return cell;
