@@ -25,6 +25,8 @@
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (nonatomic, strong) RHDynamicTransition *transition;
 @property (nonatomic, strong) UIPanGestureRecognizer *dynamicTransitionPanGesture;
+@property (nonatomic, assign) NSInteger lastCount;
+@property (nonatomic, assign) CGSize trueContentSize;
 
 @end
 
@@ -50,10 +52,11 @@
     self.slidingViewController.delegate = self.transition;
     self.slidingViewController.topViewAnchoredGesture = ECSlidingViewControllerAnchoredGestureTapping | ECSlidingViewControllerAnchoredGestureCustom;
     self.slidingViewController.customAnchoredGestures = @[self.dynamicTransitionPanGesture];
-    [self.view addGestureRecognizer:self.dynamicTransitionPanGesture];
+    [self.parentViewController.view addGestureRecognizer:self.dynamicTransitionPanGesture];
     
     self.navigationController.navigationBar.hidden = YES;
     self.searchBar.delegate = self;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -61,6 +64,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     [self fetchTweets:self.searchBar.text];
@@ -74,6 +78,7 @@
 #pragma mark - Data source retrieval and processing
 -(void)fetchTweets:(NSString*)searchString count:(NSUInteger)count
 {
+    self.lastCount = count;
     STTwitterAPI *twitter = [STTwitterAPI twitterAPIAppOnlyWithConsumerKey: @"k8WN0dn0q8bxXaBp7DMd4JPkQ" consumerSecret: @"XnUo0RaOM6h0Ut1RWc7eWYE147RdvDHEkSpII1ScB3G3Xk7cwS"];
     
     [twitter verifyCredentialsWithSuccessBlock:^(NSString *username)
@@ -152,6 +157,49 @@
     cell.detailTextLabel.text = t[@"text"];
     
     return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 80; //height
+}
+
+-(UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    if(_twitterFeed.count == 0){
+        UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+        return footer;
+    }
+    /* Creating the footer */
+    UIView* footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 80)]; //xpos, ypos, width, height
+    footer.backgroundColor = [UIColor colorWithWhite:0.5 alpha:0.1];
+    
+    /* Creating button to search Twitter and centering it */
+    UIButton *twitterSearch = [[UIButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width/2 - 100 ), 15, 200, 50)];
+    
+    /* Setting button appearance */
+    [twitterSearch setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [twitterSearch setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+    [twitterSearch setTitle:@"Load More" forState:UIControlStateNormal];
+    [twitterSearch setTitle:@"Load More" forState:UIControlStateHighlighted];
+    
+    /* Rounding the corners */
+    twitterSearch.layer.cornerRadius = 10.0;
+    twitterSearch.clipsToBounds = YES;
+    
+    //twitterSearch.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
+    twitterSearch.backgroundColor = [UIColor blueColor];
+    
+    /* Adding event handler */
+    [twitterSearch  addTarget:self action:@selector(loadMore) forControlEvents:UIControlEventTouchUpInside];
+    
+    [footer addSubview:twitterSearch];
+    
+    return footer;
+}
+#pragma mark - Selectors
+
+-(void)loadMore{
+    NSLog(@"Load More with count:%d", self.lastCount);
+    [self fetchTweets:self.searchBar.text count:self.lastCount+30];
 }
 
 #pragma mark - Tranistion Stuff

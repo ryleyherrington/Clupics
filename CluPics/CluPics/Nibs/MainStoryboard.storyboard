@@ -72,8 +72,9 @@
         <!--Twitter Table View Controller-->
         <scene sceneID="d67-9N-8dd">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NhR-NG-eD7" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="Jd7-Gn-gwf" customClass="COTwitterTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" alwaysBounceHorizontal="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" id="euL-0H-4A8">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" id="euL-0H-4A8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -122,7 +123,6 @@
                         <outlet property="tableTweetView" destination="euL-0H-4A8" id="rud-EK-x78"/>
                     </connections>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NhR-NG-eD7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1369" y="-136"/>
         </scene>
