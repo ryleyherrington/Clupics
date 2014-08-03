@@ -67,8 +67,12 @@
     [self.searchBar resignFirstResponder];
 }
 
+-(void)fetchTweets:(NSString*)searchString{
+    [self fetchTweets:searchString count:30];
+}
+
 #pragma mark - Data source retrieval and processing
--(void)fetchTweets:(NSString*)searchString
+-(void)fetchTweets:(NSString*)searchString count:(NSUInteger)count
 {
     STTwitterAPI *twitter = [STTwitterAPI twitterAPIAppOnlyWithConsumerKey: @"k8WN0dn0q8bxXaBp7DMd4JPkQ" consumerSecret: @"XnUo0RaOM6h0Ut1RWc7eWYE147RdvDHEkSpII1ScB3G3Xk7cwS"];
     
@@ -80,7 +84,7 @@
                                       lang:nil
                                     locale:nil
                                 resultType:nil
-                                     count:@"30"
+                                     count:[NSString stringWithFormat:@"%d", count]
                                      until:nil
                                    sinceID:@"421875429965053952"
                                      maxID:nil
