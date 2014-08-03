@@ -18,10 +18,11 @@
 //SSTwitter framework
 #import "STTwitter.h"
 
-@interface COTwitterTableViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface COTwitterTableViewController () <UITableViewDataSource, UITableViewDelegate,UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableTweetView;
 @property (strong, nonatomic) NSMutableArray *twitterFeed;
 
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (nonatomic, strong) RHDynamicTransition *transition;
 @property (nonatomic, strong) UIPanGestureRecognizer *dynamicTransitionPanGesture;
 
@@ -52,9 +53,7 @@
     [self.view addGestureRecognizer:self.dynamicTransitionPanGesture];
     
     self.navigationController.navigationBar.hidden = YES;
-    
-    //Fetching tweets
-    [self fetchTweets];
+    self.searchBar.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning
@@ -63,48 +62,50 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    [self fetchTweets:self.searchBar.text];
+    [self.searchBar resignFirstResponder];
+}
+
 #pragma mark - Data source retrieval and processing
--(void)fetchTweets
+-(void)fetchTweets:(NSString*)searchString
 {
     STTwitterAPI *twitter = [STTwitterAPI twitterAPIAppOnlyWithConsumerKey: @"k8WN0dn0q8bxXaBp7DMd4JPkQ" consumerSecret: @"XnUo0RaOM6h0Ut1RWc7eWYE147RdvDHEkSpII1ScB3G3Xk7cwS"];
-   
-    NSString *searchString = @"Rymee2014";
     
     [twitter verifyCredentialsWithSuccessBlock:^(NSString *username)
-    {
-        
-        [twitter getSearchTweetsWithQuery:searchString
-                                  geocode:nil
-                                     lang:nil
-                                   locale:nil
-                               resultType:nil
-                                    count:@"30"
-                                    until:nil
-                                  sinceID:@"421875429965053952"
-                                    maxID:nil
-                          includeEntities:@(YES)
-                                 callback:nil
-                             successBlock:^(NSDictionary *searchMetadata, NSArray *statuses) {
-        
-            self.twitterFeed = [NSMutableArray arrayWithArray:statuses];
-            
-            //reloading data
-            [self.tableView reloadData];
-            
-            
-            NSLog(@"Search data : %@",searchMetadata);
-            NSLog(@"\n\n Status : %@",statuses);
-            
-        } errorBlock:^(NSError *error) {
-            
-            NSLog(@"%@", error.debugDescription);
-        
-        }];
-        
-    } errorBlock:^(NSError *error)
-    {
-        NSLog(@"%@", error.debugDescription);
-    }];
+     {
+         
+         [twitter getSearchTweetsWithQuery:searchString
+                                   geocode:nil
+                                      lang:nil
+                                    locale:nil
+                                resultType:nil
+                                     count:@"30"
+                                     until:nil
+                                   sinceID:@"421875429965053952"
+                                     maxID:nil
+                           includeEntities:@(YES)
+                                  callback:nil
+                              successBlock:^(NSDictionary *searchMetadata, NSArray *statuses) {
+                                  
+                                  self.twitterFeed = [NSMutableArray arrayWithArray:statuses];
+                                  
+                                  //reloading data
+                                  [self.tableView reloadData];
+                                  
+                                  NSLog(@"Search data : %@",searchMetadata);
+                                  NSLog(@"\n\n Status : %@",statuses);
+                                  
+                              } errorBlock:^(NSError *error) {
+                                  
+                                  NSLog(@"%@", error.debugDescription);
+                                  
+                              }];
+         
+     } errorBlock:^(NSError *error)
+     {
+         NSLog(@"%@", error.debugDescription);
+     }];
     
 }
 
@@ -118,8 +119,18 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
-    return self.twitterFeed.count;
+    if (self.twitterFeed.count){
+        return self.twitterFeed.count;
+    }
+    if(self.searchBar.text.length > 0){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Tweets Found"
+                                                        message:@"Looks like we couldn't find any tweets, try again!"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"Okay"
+                                              otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -137,44 +148,6 @@
     cell.detailTextLabel.text = t[@"text"];
     
     return cell;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 80; //height
-}
-
--(UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    /* Creating the footer */
-    UIView* footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 80)]; //xpos, ypos, width, height
-    footer.backgroundColor = [UIColor colorWithWhite:0.5 alpha:0.1];
-    
-    /* Creating button to search Twitter and centering it */
-    UIButton *twitterSearch = [[UIButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width/2 - 100 ), 15, 200, 50)];
-   
-    /* Setting button appearance */
-    [twitterSearch setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [twitterSearch setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
-    [twitterSearch setTitle:@"Search Twitter" forState:UIControlStateNormal];
-    [twitterSearch setTitle:@"Search Twitter" forState:UIControlStateHighlighted];
-    
-    /* Rounding the corners */
-    twitterSearch.layer.cornerRadius = 10.0;
-    twitterSearch.clipsToBounds = YES;
-    
-    //twitterSearch.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
-    twitterSearch.backgroundColor = [UIColor blueColor];
-    
-    /* Adding event handler */
-    [twitterSearch  addTarget:self action:@selector(twitterTouched) forControlEvents:UIControlEventTouchUpInside];
-    
-    [footer addSubview:twitterSearch];
-    
-    return footer;
-}
-#pragma mark - Selectors
-
--(void)twitterTouched{
-    NSLog(@"TOUCHED");
 }
 
 #pragma mark - Tranistion Stuff

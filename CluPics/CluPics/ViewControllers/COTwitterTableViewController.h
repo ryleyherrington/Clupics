@@ -10,6 +10,4 @@
 
 @interface COTwitterTableViewController : UITableViewController
 
--(void)fetchTweets;
-
 @end
